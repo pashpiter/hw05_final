@@ -2,12 +2,10 @@ from django.contrib.auth import get_user_model
 from django.test import TestCase, Client
 from django.urls import reverse
 
-from posts.models import Post
-
 User = get_user_model()
 
 
-class UsersFormsTests(TestCase):  
+class UsersFormsTests(TestCase):
     def setUp(self):
         self.guest_client = Client()
 
@@ -22,7 +20,7 @@ class UsersFormsTests(TestCase):
             'password2': 'omta1234',
         }
         response = self.guest_client.post(reverse('signup'),
-                                      data=form_data, follow=True,)
+                                          data=form_data, follow=True,)
         self.assertRedirects(response,
                              reverse('posts:index')
                              )

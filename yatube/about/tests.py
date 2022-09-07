@@ -9,7 +9,6 @@ User = get_user_model()
 
 class PostURLTests(TestCase):
     @classmethod
-        
     def setUp(self):
         self.guest_client = Client()
         self.user = User.objects.create_user(username='HasNoName')
@@ -29,4 +28,4 @@ class PostURLTests(TestCase):
                 with self.subTest(address=address):
                     response = client.get(address)
                     self.assertEqual(response.status_code, HTTPStatus.OK,
-                                    'Ошибка в доступе к страницам!')
+                                     'Ошибка в доступе к страницам!')
