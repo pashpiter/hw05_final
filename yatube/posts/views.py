@@ -2,7 +2,7 @@ from django.core.paginator import Paginator
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.cache import cache_page
-from .models import Follow, Group, Post, Comment
+from .models import Follow, Group, Post
 from django.contrib.auth import get_user_model
 from .forms import PostForm, CommentForm
 
@@ -58,16 +58,16 @@ def profile(request, username):
 def post_detail(request, post_id):
     template = 'posts/post_detail.html'
     post = get_object_or_404(Post, pk=post_id)
+    # Для создания кнопки редактирования на страницы поста, только для автора
     is_edit = None
     form = CommentForm(request.POST or None)
-    comments = Comment.objects.filter(post_id=post_id)
     if post.author == request.user:
         is_edit = True
     context = {
         'post': post,
         'is_edit': is_edit,
         'form': form,
-        'comments': comments
+        # 'comments': comments
     }
     return render(request, template, context)
 
@@ -136,9 +136,7 @@ def profile_follow(request, username):
     author = get_object_or_404(User, username=username)
     if author == request.user:
         return redirect('posts:profile', username=author)
-    if Follow.objects.filter(user=request.user, author=author).exists():
-        return redirect('posts:profile', username=author)
-    Follow.objects.create(
+    Follow.objects.get_or_create(
         user=request.user,
         author=author
     )

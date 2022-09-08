@@ -66,7 +66,7 @@ class Comment(models.Model):
         Post,
         on_delete=models.CASCADE,
         related_name='comments',
-        verbose_name='Комментарии')
+        verbose_name='Текст поста')
     author = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
@@ -74,14 +74,17 @@ class Comment(models.Model):
         verbose_name='Автор комментария'
     )
     text = models.TextField(
-        verbose_name='Текст поста',
-        help_text='Текст поста',
+        verbose_name='Текст комментария',
+        help_text='Текст комментария',
         max_length=300
     )
     created = models.DateTimeField(
         auto_now_add=True,
         verbose_name='Дата публикации комментария'
     )
+
+    def __str__(self) -> str:
+        return self.text[:LETTERS_MAX_LENGTH]
 
     class Meta:
         ordering = ['-created']
@@ -100,3 +103,6 @@ class Follow(models.Model):
         related_name='following',
         verbose_name='Автор на которого подписались'
     )
+
+    def __str__(self) -> str:
+        return f'Пользователь {self.user} подписан на {self.author}'
