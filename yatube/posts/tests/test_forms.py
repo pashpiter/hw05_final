@@ -79,11 +79,22 @@ class PostURLTests(TestCase):
 
     def test_edit_post(self):
         """Валидная форма изменяет Post в БД"""
-        username = self.post.author
-        post_id = self.post.pk
+        group_2 = Group.objects.create(
+            title='Тестовая группа 2',
+            slug='catJAM2',
+            description='Тестовое описание 2',
+        )
+        post = Post.objects.create(
+            author=self.user,
+            text='Тестовый пост с группой group_2',
+            group=group_2,
+        )
+        username = post.author
+        post_id = post.pk
         author_client = Client()
         author_client.force_login(username)
-        posts_count = Post.objects.count()
+        posts_count_group = self.group.posts.count()
+        posts_count_group_2 = group_2.posts.count()
         form_data = {
             'text': 'Измененный тестовый пост',
             'group': self.group.id
@@ -96,7 +107,8 @@ class PostURLTests(TestCase):
                                      kwargs={'post_id': post_id}
                                      )
                              )
-        self.assertEqual(Post.objects.count(), posts_count)
-        self.assertEqual(self.post.author, response.context['user'])
+        self.assertEqual(self.group.posts.count(), posts_count_group + 1)
+        self.assertEqual(group_2.posts.count(), posts_count_group_2 - 1)
+        self.assertEqual(post.author, response.context['user'])
         self.assertEqual(self.group, Post.objects.all()[0].group)
         self.assertTrue(Post.objects.filter(image='posts/small.gif').exists())
