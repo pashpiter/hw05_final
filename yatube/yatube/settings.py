@@ -46,7 +46,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'sorl.thumbnail',  # Приложение для картинок
+    'debug_toolbar',  # DjDT
+    'sorl.thumbnail',  # Приложения для картинок
 ]
 
 MIDDLEWARE = [
@@ -57,6 +58,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',  # DjDT
 ]
 
 ROOT_URLCONF = 'yatube.urls'
@@ -149,3 +151,8 @@ CACHES = {
         'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
     }
 }
+
+# Для DjDT
+INTERNAL_IPS = [
+    '127.0.0.1',
+]
