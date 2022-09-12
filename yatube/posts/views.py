@@ -16,7 +16,7 @@ def paginator(post_list, request) -> dict:
     return paginator.get_page(page_number)
 
 
-@cache_page(20, key_prefix='index_page')
+@cache_page(5, key_prefix='index_page')
 def index(request):
     post_list = Post.objects.select_related('author')
     page_obj = paginator(post_list, request)
@@ -71,6 +71,15 @@ def post_detail(request, post_id):
     }
     return render(request, template, context)
 
+@login_required
+def post_delete(request, post_id):
+    post = get_object_or_404(Post, pk=post_id)
+    author = post.author
+    if request.user != author:
+        redirect('posts:post_detail', post_id)
+    post.delete()
+    # Post.objects.filter(post_id=post_id).delete()
+    return redirect('posts:profile', author)
 
 @login_required
 def post_create(request):
