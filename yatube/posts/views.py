@@ -71,6 +71,7 @@ def post_detail(request, post_id):
     }
     return render(request, template, context)
 
+
 @login_required
 def post_delete(request, post_id):
     post = get_object_or_404(Post, pk=post_id)
@@ -80,6 +81,7 @@ def post_delete(request, post_id):
     post.delete()
     # Post.objects.filter(post_id=post_id).delete()
     return redirect('posts:profile', author)
+
 
 @login_required
 def post_create(request):
