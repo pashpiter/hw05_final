@@ -1,31 +1,41 @@
 {% extends "base.html" %}
 {% block title %}Технологии{% endblock %}
 {% block content %}
-{% comment %} Колонки с отступом сверху и снизу {% endcomment %}
 <div class="row">
-  <h1>Вот что я умею</h1>
-  {% comment %}
-    Боковой блок со списком технологий 
-    Займет всю ширину блока на мобильном
-    и 25% при размерах экрана ≥768px
-  {% endcomment %}
-  <aside class="col-12 col-md-3">
-    <ul class="list-group list-group-flush">
-      <li class="list-group-item">
-        Python
-      </li>
-      <li class="list-group-item">
-        Django
-      </li>
-    </ul>
-  </aside>
-  {% comment %}
-    Статья  
-    Займет всю ширину блока на мобильном
-    и 75% при размерах экрана ≥768px
-  {% endcomment %}
-  <article class="col-12 col-md-9">
-    <p>Текст страницы "Технологии"</p>
-  </article>
+  <h1>Что использовалось в данном проекте</h1>
+  <div class="card-group">
+    <div class="card">
+      <div class="card-body">
+      </div>
+      <img src="/static/img/about/python.jpg" class="card-img-top" alt="...">
+      
+      <div class="card-body">
+        <h5 class="card-title">Python</h5>
+        <p class="card-text">Сайт написан на языке Python</p>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-body">
+      </div>
+      <img src="/static/img/about/django.png" class="card-img-top" alt="...">
+      <div class="card-body"> 
+      </div>
+      <div class="card-body">
+        <h5 class="card-title">Django</h5>
+        <p class="card-text">Для разработки использовался свободный фреймворк Django для веб-приложений на языке Python</p>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-body">
+      </div>
+      <img src="/static/img/about/bootstrap.png" class="card-img-top" alt="...">
+      <div class="card-body">
+      </div>
+      <div class="card-body">
+        <h5 class="card-title">Bootstrap</h5>
+        <p class="card-text">Для создания страниц использовался Bootstrap</p>
+      </div>
+    </div>
+  </div>
 </div>
 {% endblock %}
