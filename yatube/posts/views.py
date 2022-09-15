@@ -2,7 +2,7 @@ from django.core.paginator import Paginator
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.cache import cache_page
-from .models import Follow, Group, Post
+from .models import Follow, Group, Post, Comment
 from django.contrib.auth import get_user_model
 from .forms import PostForm, CommentForm
 
@@ -127,6 +127,12 @@ def add_comment(request, post_id):
         comment.author = request.user
         comment.post = post
         comment.save()
+    return redirect('posts:post_detail', post_id=post_id)
+
+
+@login_required
+def comment_delete(request, post_id, comment_id):
+    get_object_or_404(Comment, pk=comment_id).delete()
     return redirect('posts:post_detail', post_id=post_id)
 
 
