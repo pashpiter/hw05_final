@@ -23,12 +23,20 @@
           {{ comment.author.get_full_name }}
         </a>
       </h5>
-      <p class="fs-6">
-        {{ comment.text }}
-      </p>
-      <a href="{% url 'posts:comment_delete' post.id comment.id %}">
-        <p class="fs-6">Удалить комментарий</p>
-      </a>
+      <div class="row">
+        <div class="col-9 col-md-9">
+          <p class="fs-6">
+            {{ comment.text }}
+          </p>
+        </div>
+        <div class="col-3 col-md-3">
+          {% if comment.author == request.user %}
+            <a href="{% url 'posts:comment_delete' post.id comment.id %}">
+              <p class="fs-6">Удалить комментарий</p>
+            </a>
+          {% endif %}
+        </div>
+      </div>
     </div>
   </div>
 {% endfor %}

@@ -132,7 +132,10 @@ def add_comment(request, post_id):
 
 @login_required
 def comment_delete(request, post_id, comment_id):
-    get_object_or_404(Comment, pk=comment_id).delete()
+    comment = get_object_or_404(Comment, pk=comment_id)
+    if request.user != comment.author:
+        return redirect('posts:post_detail', post_id=post_id)
+    comment.delete()
     return redirect('posts:post_detail', post_id=post_id)
 
 
