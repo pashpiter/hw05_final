@@ -78,7 +78,6 @@ def post_delete(request, post_id):
     if request.user != author:
         redirect('posts:post_detail', post_id)
     post.delete()
-    # Post.objects.filter(post_id=post_id).delete()
     return redirect('posts:profile', author)
 
 

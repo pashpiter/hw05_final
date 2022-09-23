@@ -1,0 +1,23 @@
+<div class="media mb-4">
+    <br>
+    <h5>Последний комментарий:</h5>
+  <div class="media-body">
+    <h6 class="mt-0">
+        {{ post.comments.first.author.get_full_name }}
+    </h6>
+    <div class="row">
+        <div class="col-9 col-md-9">
+            <p class="fs-6">
+            {{ post.comments.first.text }}
+            </p>
+        </div>
+        <div class="col-3 col-md-3">
+            {% if post.comments.first.author == request.user %}
+            <a href="{% url 'posts:comment_delete' post.id post.comments.first.id %}">
+                <p class="fs-6">Удалить комментарий</p>
+            </a>
+            {% endif %}
+        </div>
+    </div>
+  </div>
+</div>

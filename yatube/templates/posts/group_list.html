@@ -25,6 +25,9 @@
               <img class="card-img my-2" src="{{ im.url }}">
               {% endthumbnail %}
               <p>{{ post.text }}</p>
+              {% if post.comments.all %}
+                {% include 'posts/includes/last_comment.html' %}
+              {% endif %}
             </article>
             {% if not forloop.last %}<hr>{% endif %}
           {% endfor %}
