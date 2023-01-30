@@ -1,3 +1,26 @@
-# hw05_final
+# Учебный проект "социальная сеть Yatube"
 
-[![CI](https://github.com/yandex-praktikum/hw05_final/actions/workflows/python-app.yml/badge.svg?branch=master)](https://github.com/yandex-praktikum/hw05_final/actions/workflows/python-app.yml)
+### Стек: Python 3, Django 2.2, SQLite3
+
+Классическая MVT архитектура проекта. Реализовананы модели, формы, view-функции, роутеры, авторизация и регистрация пользователй, админка, пагинация, шаблоны HTML, статика, тесты для проверки работы функций.
+Настроены права пользователей, которые не позволяют создавать посты для незарегестрированных юзеров, удалять и редактировать не свои посты. А также дополнительные права для администраторов. 
+
+
+### Запуск проекта в dev-режиме (для справки)
+1. Установите и активируйте виртуальное окружение
+```
+python -m venv venv
+```
+```
+source venv/scripts/activate
+```
+2. Установите зависимости из файла requirements.txt
+```
+pip install -r requirements.txt
+``` 
+3. В папке с файлом manage.py выполните команду:
+```
+python manage.py runserver
+```
+### Автор проекта
+Павел Дровнин
